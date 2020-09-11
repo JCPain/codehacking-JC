@@ -1,6 +1,13 @@
 @extends('layouts.admin')
 @section('content')
     <h1>Users</h1>
+    @if(Session::has('msg-created'))
+        <p class="bg-success">{{session('msg-created')}}</p>
+    @elseif(Session::has('msg-updated'))
+        <p class="bg-info">{{session('msg-updated')}}</p>
+    @elseif(Session::has('msg-deleted'))
+        <p class="bg-danger">{{session('msg-deleted')}}</p>
+    @endif
     <table class="table">
         <thead>
             <tr>

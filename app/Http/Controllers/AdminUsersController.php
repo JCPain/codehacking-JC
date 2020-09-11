@@ -10,6 +10,8 @@ use App\Photo;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Session;
+
 use App\Http\Requests;
 
 use App\Http\Requests\UsersRequest;
@@ -75,6 +77,8 @@ class AdminUsersController extends Controller
 
         User::create($input);
 
+        Session::flash('msg-created', 'New user ' . $input['name'] . ' has been created.');
+
         return redirect('/admin/users');
 
         // return $request->all();
@@ -120,6 +124,7 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
+        // Do not deal with the password if the password field is empty
         if(trim($request->password) == '') {
 
             $input = $request->except('password');
@@ -144,7 +149,7 @@ class AdminUsersController extends Controller
             
             //Finds the old picture and deletes it
             #Finds the old picture and deletes it
-            if ($user->photo_id != null)
+            if($user->photo_id != null)
             {
                 $photo = Photo::findOrFail($user->photo_id);
     
@@ -156,6 +161,8 @@ class AdminUsersController extends Controller
         }
 
         $user->update($input);
+
+        Session::flash('msg-updated', 'User named ' . $user->name . ' has been updated.');
 
         return redirect('/admin/users');
 
@@ -170,5 +177,26 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+
+        // Delete the photo in the directory
+        // unlink(public_path() . $user->photo->file);
+
+        // Delete photo path from the photo table and the public directory as well
+        if($user->photo_id)
+        {
+            $photo = Photo::findOrFail($user->photo_id);
+
+            unlink(public_path() . $photo->file);
+
+            $photo->delete();
+        }
+        
+        $user->delete();
+
+        Session::flash('msg-deleted', 'User named ' . $user->name . ' has been deleted.');
+
+        return redirect('/admin/users');
+
     }
 }
