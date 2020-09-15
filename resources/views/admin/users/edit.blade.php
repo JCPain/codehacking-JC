@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
+    <h1>Edit User</h1>
     <div class="row">
-        <h1>Edit User</h1>
         <div class="col-sm-3">
-            <img width="200" height="100" src="{{$user->photo ? $user->photo->file : 'https://source.unsplash.com/featured/?sky'}}" alt="">
+            <img class="img-responsive" src="{{$user->photo ? $user->photo->file : 'https://source.unsplash.com/featured/?sky'}}" alt="">
         </div>
         <div class="col-sm-9">
             {!! Form::model($user, ['method' => 'PATCH', 'action' => ['AdminUsersController@update', $user->id], 'files' => true]) !!}
