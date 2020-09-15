@@ -2,6 +2,13 @@
 
 @section('content')
     <h1>Posts</h1>
+    @if(Session::has('msg-created'))
+        <p class="bg-success">{{session('msg-created')}}</p>
+    @elseif(Session::has('msg-updated'))
+        <p class="bg-info">{{session('msg-updated')}}</p>
+    @elseif(Session::has('msg-deleted'))
+        <p class="bg-danger">{{session('msg-deleted')}}</p>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -21,10 +28,10 @@
                     <tr>
                         <td>{{$post->id}}</td>
                         <td><img height="50" width="70" src="{{$post->photo ? $post->photo->file : 'https://source.unsplash.com/featured/?sky'}}" alt=""></td>
-                        <td>{{$post->user->name}}</td>
+                        <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->user->name}}</a></td>
                         <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
                         <td>{{$post->title}}</td>
-                        <td>{{$post->body}}</td>
+                        <td>{{str_limit($post->body, 30)}}</td>
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
                     </tr>
