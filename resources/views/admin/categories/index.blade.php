@@ -21,7 +21,7 @@
             {!! Form:: close() !!}
         </div>
         <div class="col-sm-6">
-            @if($categories)
+            @if(count($categories) > 0)
                 <table class="table">
                     <thead>
                         <tr>
@@ -40,6 +40,8 @@
                         @endforeach
                     </tbody>
                 </table>
+            @else
+                <h4 class="alert alert-warning text-center">No Categories</h4>
             @endif
         </div>
     </div>

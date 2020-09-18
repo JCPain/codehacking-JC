@@ -32,6 +32,7 @@
     @if(Session::has('msg-created'))
         <p class="alert alert-info">{{session('msg-created')}}</p>
     @endif
+    
     <!-- Blog Comments -->
 
     <!-- Comments Form -->
@@ -40,11 +41,11 @@
         {!! Form::open(['method' => 'POST', 'action' => 'PostCommentsController@store']) !!}
             <input type="hidden" name="post_id" value="{{$post->id}}">
             <div class="form-group">
-                {!! Form::label('body', 'Description:') !!}
+                {!! Form::label('body', 'Body:') !!}
                 {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3]) !!}
             </div>
             <div class="form-group">
-                {!! Form::submit('Create Comment', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Submit Comment', ['class' => 'btn btn-primary']) !!}
             </div>
         {!! Form::close() !!}
     </div>
