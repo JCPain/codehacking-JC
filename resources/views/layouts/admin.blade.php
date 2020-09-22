@@ -160,9 +160,9 @@
                                 <a href="{{route('admin.categories.index')}}">All Categories</a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="{{route('admin.categories.create')}}">Create Category</a>
-                            </li>
+                            </li> --}}
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -262,7 +262,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    <li class="active">
+                    <li class="">
                         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

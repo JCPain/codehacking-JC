@@ -41,7 +41,7 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::pluck('name', 'id')->all();
 
         return view('admin.users.create', compact('roles'));
     }
@@ -107,7 +107,7 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::pluck('name', 'id')->all();
 
         return view('admin.users.edit', compact('user','roles'));
     }
@@ -196,7 +196,6 @@ class AdminUsersController extends Controller
 
         Session::flash('msg-deleted', 'User named ' . $user->name . ' has been deleted.');
 
-        return redirect('/admin/users');
-
+        return redirect('admin/users');
     }
 }

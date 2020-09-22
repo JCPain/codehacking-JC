@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
     <h1>Posts</h1>
     @if(Session::has('msg-created'))

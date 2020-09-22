@@ -41,7 +41,7 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        $categories = Category::lists('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
 
         return view('admin.posts.create', compact('categories'));
     }
@@ -101,7 +101,7 @@ class AdminPostsController extends Controller
         //
         $post = Post::findOrFail($id);
 
-        $categories = Category::lists('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
 
         return view('admin.posts.edit', compact('post', 'categories'));
     }
@@ -164,13 +164,17 @@ class AdminPostsController extends Controller
         //
         $post = Post::findOrFail($id);
 
-        // Delete old photo path from the photo table and delete photo in the public directory as well
-        $photo = Photo::findOrFail($post->photo->id);
+        if($post->photo->id) {
 
-        unlink(public_path() . $post->photo->file);
+            // Delete old photo path from the photo table and delete photo in the public directory as well
+            $photo = Photo::findOrFail($post->photo->id);
+            
+            unlink(public_path() . $post->photo->file);
+    
+            $photo->delete();
 
-        $photo->delete();
-        
+        }
+            
         // Delete the post
         $post->delete();
 

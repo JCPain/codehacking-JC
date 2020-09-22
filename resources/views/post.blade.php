@@ -20,7 +20,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="{{$post->photo->file}}" alt="">
+    <img class="img-responsive" src="{{$post->photo->file ? : 'https://source.unsplash.com/featured/?sky'}}" alt="">
 
     <hr>
 

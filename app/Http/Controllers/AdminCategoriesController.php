@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests;
 
+use App\Http\Requests\CategoriesCreateRequest;
+
 use App\Category;
 
 class AdminCategoriesController extends Controller
@@ -31,7 +33,7 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesCreateRequest $request)
     {
         //
         Category::create($request->all());

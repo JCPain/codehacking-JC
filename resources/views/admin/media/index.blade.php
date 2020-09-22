@@ -9,7 +9,7 @@
         <p class="bg-danger">{{session('msg-deleted')}}</p>
     @endif
     <div class="row">
-        <div class="col-sm-6">
+        <div class="">
             @if($photos)
                 <table class="table">
                     <thead>
