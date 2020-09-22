@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <h1>Edit Post</h1>
+    @include('includes.tinyeditor')
     <div class="row">
         <div class="col-sm-3">
-            <img class="img-responsive" src="{{$post->photo ? $post->photo->file : 'https://source.unsplash.com/featured/?sky'}}" alt="">
+            <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="">
         </div>
         <div class="col-sm-9">
             {!! Form::model($post, ['method' => 'PATCH', 'action' => ['AdminPostsController@update', $post->id], 'files' => true]) !!}
