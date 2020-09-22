@@ -12,6 +12,10 @@
 */
 Auth::routes();
 
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//     '\vendor\uniSharp\LaravelFilemanager\Lfm::routes()';
+// });
+
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/', function () {
