@@ -42,7 +42,7 @@
         </tbody>
     </table>
     @else
-        <h1 class="alert alert-warning">No Posts</h1>
+        <h1 class="alert alert-danger text-center">No Posts</h1>
     @endif
     <div class="row">
         <div class="col-sm-6 col-sm-offset-5">

@@ -10,13 +10,15 @@
     @endif
     <div class="row">
         <div class="">
-            @if($photos)
-                <form action="/delete/media" method="post" class="form-inline">
-                    <select name="checkBoxArray" class="form-control">
-                        <option value="delete">Delete</option>
-                    </select>
+            @if(count($photos) > 0)
+                <form action="delete/media" method="post" class="form-inline">
+                    {{csrf_field()}}
+                    {{method_field('delete')}}
+                    {{-- <select name="checkBoxArray" class="form-control">
+                        <option value="">Delete</option>
+                    </select> --}}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-danger" value="Delete">
+                        <input type="submit" class="btn btn-sm btn-danger" name="delete_all" value="Delete">
                     </div>
                     <table class="table">
                         <thead>
@@ -35,18 +37,19 @@
                                     <td>{{$photo->id}}</td>
                                     <td><img height="50" width="100" src="{{$photo->file}}" alt=""></td>
                                     <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'no date'}}</td>
-                                    <td>
-                                        {!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediasController@destroy', $photo->id]]) !!}
+                                    {{-- <td>
+                                        <input type="hidden" name="photo_id" value="{{$photo->id}}">
                                         <div class="form-group">
-                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                            <input type="submit" name="delete_single[{{$photo->id}}]" class="btn btn-danger" value="Delete">
                                         </div>
-                                        {!! Form::close() !!}
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </form>
+            @else
+                <h1 class="alert alert-danger text-center">No Photos</h1>
             @endif
         </div>
     </div>

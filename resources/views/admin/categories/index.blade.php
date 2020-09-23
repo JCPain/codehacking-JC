@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
             @else
-                <h4 class="alert alert-warning text-center">No Categories</h4>
+                <h4 class="alert alert-danger text-center">No Categories</h4>
             @endif
         </div>
     </div>

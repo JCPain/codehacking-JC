@@ -51,6 +51,6 @@
             </tbody>
         </table>
     @else
-        <h1 class="alert alert-warning text-center">No Comments</h1>
+        <h1 class="alert alert-danger text-center">No Comments</h1>
     @endif
 @stop
