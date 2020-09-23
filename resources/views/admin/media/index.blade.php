@@ -11,33 +11,72 @@
     <div class="row">
         <div class="">
             @if($photos)
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Created Date</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($photos as $photo)
+                <form action="/delete/media" method="post" class="form-inline">
+                    <select name="checkBoxArray" class="form-control">
+                        <option value="delete">Delete</option>
+                    </select>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </div>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>{{$photo->id}}</td>
-                                <td><img height="50" width="100" src="{{$photo->file}}" alt=""></td>
-                                <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'no date'}}</td>
-                                <td>
-                                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediasController@destroy', $photo->id]]) !!}
-                                    <div class="form-group">
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                    </div>
-                                    {!! Form::close() !!}
-                                </td>
+                                <th><input type="checkbox" id="options"></th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Created Date</th>
+                                <th>Delete</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($photos as $photo)
+                                <tr>
+                                    <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{$photo->id}}"></td>
+                                    <td>{{$photo->id}}</td>
+                                    <td><img height="50" width="100" src="{{$photo->file}}" alt=""></td>
+                                    <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'no date'}}</td>
+                                    <td>
+                                        {!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediasController@destroy', $photo->id]]) !!}
+                                        <div class="form-group">
+                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </form>
             @endif
         </div>
     </div>
+@stop
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $('#options').click(function() {
+
+                if(this.checked) {
+
+                    $('.checkBoxes').each(function() {
+
+                        this.checked = true;
+
+                    });
+
+                } else {
+
+                    $('.checkBoxes').each(function() {
+
+                        this.checked = false;
+
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
 @stop
