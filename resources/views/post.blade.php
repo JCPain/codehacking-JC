@@ -22,7 +22,7 @@
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-responsive" src="{{$post->photo->file ? : $post->photoPlaceHolder()}}" alt="">
+            <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceHolder()}}" alt="">
 
             <hr>
 
